@@ -1,5 +1,6 @@
 from django.http import HttpResponse,HttpRequest,JsonResponse
 from django.urls import path
+import json
 
 def index(request: HttpRequest):
     # Get query parameters
@@ -9,6 +10,16 @@ def index(request: HttpRequest):
         'a': a,
         'b': b
     }
+    # Get json request body
+    if request.method == 'POST':
+        data = request.POST
+        body = request.body
+        # Convert bytes to string
+        # body = body.decode('utf-8')
+        # Convert string to dictionary
+        data = json.loads(body)
+        print(data['a'])
+
     return JsonResponse(data)
 
  
