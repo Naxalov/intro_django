@@ -1,5 +1,6 @@
 from django.http import HttpRequest, JsonResponse, HttpResponse
 from .models import Person
+import json
 
     
 def index(request: HttpRequest):
@@ -9,10 +10,23 @@ def about(request: HttpRequest):
     return JsonResponse({'message': 'About Page'})
 
 def home(request: HttpRequest,pk=0):
-    x = Person.objects.all()
-    # print type of x
-    for p in x:
-        print(p.first_name)
-    
-    print('Get request')
-    return JsonResponse({'message': f'Welcome to the API!: {pk}'})
+    if request.method=='POST':
+        data = request.body.decode('utf-8')
+        # convert string to dictionary
+        data = json.loads(data)
+        first_name = data['first_name']
+        last_name = data['last_name']
+        job = data['job']
+        person = Person.objects.create(
+            first_name=first_name,
+            last_name=last_name,
+            job=job,
+            count=0
+        
+        )
+    else:
+        return JsonResponse({'message':'josn'})
+
+   
+   
+    return JsonResponse({'message': 'User Created successfully'})
