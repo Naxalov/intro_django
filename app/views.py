@@ -9,4 +9,10 @@ def about(request: HttpRequest):
     return JsonResponse({'message': 'About Page'})
 
 def home(request: HttpRequest,pk=0):
+    x = Person.objects.all()
+    # print type of x
+    for p in x:
+        print(p.first_name)
+    
+    print('Get request')
     return JsonResponse({'message': f'Welcome to the API!: {pk}'})
