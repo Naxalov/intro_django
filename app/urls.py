@@ -3,10 +3,10 @@ from .views import index,home,about
 urlpatterns = [
     
 
-    path('home/<int:pk>/', home),
+    # path('home/<int:pk>/', home),
     path('home/', home),
-    path('index/', index),
-    path('index/about', about),
+    # path('index/', index),
+    # path('index/about', about),
 
 
 
