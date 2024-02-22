@@ -1,4 +1,4 @@
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest, JsonResponse, HttpResponse
 import json
 data = {
     1: {
@@ -17,7 +17,8 @@ data = {
 # POST /items/ - Add a new item
 # GET /items/<id>/ - Get item by id
 
-
+def about(request):
+    return HttpResponse('About page')
 def get_all_items(request: HttpRequest):
     return JsonResponse(data)
 
@@ -43,5 +44,5 @@ def index(request: HttpRequest):
         print(data['a'])
 
     return JsonResponse(data)
-def home(request: HttpRequest):
-    return JsonResponse({'message': 'Welcome to the API!'})
+def home(request: HttpRequest,pk=0):
+    return JsonResponse({'message': f'Welcome to the API!: {pk}'})
